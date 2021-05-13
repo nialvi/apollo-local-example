@@ -1,0 +1,26 @@
+type Company {
+  name: String!
+  catchPhrase: String!
+  bs: String!
+}
+
+type Geo {
+  lat: Float!
+  lng: Float!
+}
+
+type Address {
+  street: String!
+  suite: String!
+  city: String!
+  zipcode: String!
+  geo: Geo!
+}
+
+type User {
+  id: ID!
+  name: String!
+  username: String!
+  email: String!
+  adress: Address!
+}
