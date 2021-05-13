@@ -1,0 +1,10 @@
+query todoList {
+  todos @client {
+    id
+    title
+    user {
+      id
+      name
+    }
+  }
+}

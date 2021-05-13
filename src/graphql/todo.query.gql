@@ -1,0 +1,10 @@
+query todo($id: ID!) {
+  todo(id: $id) @client {
+    id
+    title
+    user {
+      id
+      name
+    }
+  }
+}
