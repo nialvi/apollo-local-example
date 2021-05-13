@@ -2,5 +2,10 @@ query usersList {
   users @client {
     id
     name
+    address {
+      id
+      city
+      zipcode
+    }
   }
 }

@@ -9,7 +9,7 @@ type Geo {
   lng: Float!
 }
 
-type Address {
+type ClientAddress {
   street: String!
   suite: String!
   city: String!
@@ -22,7 +22,7 @@ type ClientUser {
   name: String!
   username: String!
   email: String!
-  adress: Address!
+  address: ClientAddress!
 }
 
 type Query {

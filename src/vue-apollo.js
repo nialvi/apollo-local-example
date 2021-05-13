@@ -15,6 +15,11 @@ const resolvers = {
       return rawUserData.map((user) => ({
         __typename: "ClientUser",
         ...user,
+        address: {
+          __typename: "ClientAddress",
+          ...user.address,
+          id: `address-${user.id}`,
+        },
       }));
     },
   },
