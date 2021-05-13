@@ -1,7 +1,8 @@
+#import "./todo.fragment.gql"
+
 query todo($id: ID!) {
   todo(id: $id) @client {
-    id
-    title
+    ...TodoListItem
     user {
       id
       name

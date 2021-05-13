@@ -1,0 +1,7 @@
+fragment TodoListItem on ClientTodo {
+  id
+  title
+  user {
+    id
+  }
+}
