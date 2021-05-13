@@ -7,7 +7,6 @@ import { ApolloClient, InMemoryCache } from "@apollo/client";
 const resolvers = {
   Query: {
     async users() {
-      console.log("resolver called");
       const rawUserData = await fetch(
         "https://jsonplaceholder.typicode.com/users"
       ).then((res) => res.json());
@@ -15,12 +14,17 @@ const resolvers = {
       return rawUserData.map((user) => ({
         __typename: "ClientUser",
         ...user,
-        address: {
-          __typename: "ClientAddress",
-          ...user.address,
-          id: `address-${user.id}`,
-        },
       }));
+    },
+  },
+  ClientUser: {
+    address(parent) {
+      console.log("resolver address called");
+      return {
+        __typename: "ClientAddress",
+        ...parent.address,
+        id: `address-${parent.id}`,
+      };
     },
   },
 };
