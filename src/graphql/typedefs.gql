@@ -24,3 +24,7 @@ type User {
   email: String!
   adress: Address!
 }
+
+type Query {
+  users: [User!]!
+}
