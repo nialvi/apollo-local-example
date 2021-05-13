@@ -10,7 +10,16 @@
 
     <div>
       <div v-if="$apollo.queries.todos.loading">Loading...</div>
-      <div v-else>{{ todos }}</div>
+      <div v-else>
+        <ul>
+          <li v-for="todoItem in todos" :key="todoItem.id">
+            {{ todoItem.id }} - {{ todoItem.title }}
+            <ul>
+              <li>{{ todoItem.user.name }}</li>
+            </ul>
+          </li>
+        </ul>
+      </div>
     </div>
   </div>
 </template>

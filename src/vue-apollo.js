@@ -1,8 +1,18 @@
 import Vue from "vue";
 import VueApollo from "vue-apollo";
-import typeDefs from "./graphql/typedefs.gql";
-
 import { ApolloClient, InMemoryCache } from "@apollo/client";
+import typeDefs from "./graphql/typedefs.gql";
+import DataLoader from "dataloader";
+
+const userLoader = new DataLoader((ids) =>
+  Promise.all(
+    ids.map((id) =>
+      fetch(`https://jsonplaceholder.typicode.com/users/${id}`).then((r) =>
+        r.json()
+      )
+    )
+  )
+);
 
 const resolvers = {
   Query: {
@@ -39,9 +49,7 @@ const resolvers = {
 
   ClientTodo: {
     async user(parent) {
-      const rawUserData = await fetch(
-        `https://jsonplaceholder.typicode.com/users/${parent.userId}`
-      ).then((res) => res.json());
+      const rawUserData = await userLoader.load(parent.userId);
 
       return {
         ...rawUserData,
