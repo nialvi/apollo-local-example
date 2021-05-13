@@ -6,11 +6,16 @@ import { ApolloClient, InMemoryCache } from "@apollo/client";
 
 const resolvers = {
   Query: {
-    users() {
+    async users() {
       console.log("resolver called");
-      return fetch("https://jsonplaceholder.typicode.com/users").then((res) =>
-        res.json()
-      );
+      const rawUserData = await fetch(
+        "https://jsonplaceholder.typicode.com/users"
+      ).then((res) => res.json());
+
+      return rawUserData.map((user) => ({
+        __typename: "ClientUser",
+        ...user,
+      }));
     },
   },
 };
